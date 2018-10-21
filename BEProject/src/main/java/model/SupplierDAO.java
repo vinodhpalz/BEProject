@@ -11,8 +11,9 @@ public class SupplierDAO {
 		db = new DBConfig();
 	}
 	
-	public void insertSupplier(Supplier s)
+	public boolean insertSupplier(Supplier s)
 	{
+		boolean b = true;
 		try
 		{
 			sess = db.getSess();
@@ -22,9 +23,11 @@ public class SupplierDAO {
 			
 		}catch(Exception ex)
 		{
+			b = false;
 			sess.getTransaction().rollback();
 			ex.printStackTrace();
 		}
+		return b;
 	}
 	
 }
